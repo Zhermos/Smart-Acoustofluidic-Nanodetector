@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Acoustofluidic Nanodetector | Next-Gen AI Medical Tech</title>
+  <meta name="description" content="นวัตกรรมการคัดแยก ตรวจจับ และวิเคราะห์อนุภาคชีวภาพระดับนาโนในเลือดด้วยเทคโนโลยี Microfluidics, Acoustofluidics และ AI สำหรับ Precision Medicine">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            },
+            pink: {
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js & OrbitControls CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <!-- KaTeX LaTeX Math Notation CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Custom Styles Sheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 antialiased selection:bg-cyan-500 selection:text-black">
+
+  <!-- Top Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-pink-500 p-0.5 glow-cyan-box">
+          <div class="w-full h-full bg-gray-950 rounded-[7px] flex items-center justify-center">
+            <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-wider text-gradient-cyan">SAN-X1</span>
+          <span class="text-xs text-gray-400 block font-mono">ACOUSTOFLUIDIC NANODETECTOR</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-300">
+        <a href="#overview" class="hover:text-cyan-400 transition-colors">Overview</a>
+        <a href="#significance" class="hover:text-cyan-400 transition-colors">Significance</a>
+        <a href="#simulation" class="hover:text-pink-400 transition-colors flex items-center gap-1.5 text-cyan-400 font-semibold">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+          </span>
+          3D Simulation Engine
+        </a>
+        <a href="#principles" class="hover:text-cyan-400 transition-colors">Principles</a>
+        <a href="#results" class="hover:text-cyan-400 transition-colors">Results & Roadmap</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+          <i data-lucide="activity" class="w-3 h-3 mr-1 animate-pulse"></i> SYSTEM READY
+        </span>
+        <a href="#simulation" class="cyber-btn px-4 py-2 text-xs font-mono font-semibold rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-gray-950 hover:brightness-110 shadow-lg shadow-cyan-500/20">
+          Launch Engine
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION & OVERVIEW -->
+  <section id="overview" class="relative min-h-screen pt-24 pb-16 flex items-center justify-center overflow-hidden bg-grid-pattern bg-radial-glow">
+    <!-- 3D Background Canvas -->
+    <div id="hero-3d-canvas" class="absolute inset-0 z-0 opacity-70 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-gray-900/80 border border-cyan-500/40 text-cyan-300 text-xs font-mono mb-6 backdrop-blur-md">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-pink-400"></i>
+        <span>NEXT-GEN ACOUSTIC MICROFLUIDICS & AI VISION</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+        Smart Acoustofluidic <br>
+        <span class="text-gradient-cyan">Nanodetector</span>
+      </h1>
+
+      <p class="max-w-3xl mx-auto text-lg sm:text-xl text-gray-300 mb-8 font-light leading-relaxed">
+        นวัตกรรมการคัดแยก ตรวจจับ และวิเคราะห์อนุภาคชีวภาพระดับนาโนในเลือด (เช่น <span class="text-pink-400 font-semibold">Exosome</span>) ด้วยเทคโนโลยี Microfluidics, Acoustofluidics และ AI ยกระดับระบบการตรวจวินิจฉัยโรคความแม่นยำสูง (Precision Medicine)
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+        <a href="#simulation" class="cyber-btn px-8 py-4 text-sm font-semibold rounded-xl bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 text-gray-950 shadow-xl shadow-cyan-500/30 flex items-center gap-2">
+          <i data-lucide="box" class="w-5 h-5"></i> เข้าสู่ระบบจำลอง 3 มิติ (3D Engine)
+        </a>
+        <a href="#principles" class="px-8 py-4 text-sm font-semibold rounded-xl glass-panel text-gray-200 hover:text-white border border-gray-700 hover:border-cyan-500/50 flex items-center gap-2 transition-all">
+          <i data-lucide="book-open" class="w-5 h-5 text-cyan-400"></i> หลักการทำงานทางวิศวกรรม
+        </a>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="glass-panel p-4 rounded-xl border border-cyan-500/20">
+          <div class="text-2xl sm:text-3xl font-extrabold text-gradient-cyan font-mono mb-1">98.4%</div>
+          <div class="text-xs text-gray-400 font-medium">Exosome Separation Purity</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl border border-pink-500/20">
+          <div class="text-2xl sm:text-3xl font-extrabold text-gradient-pink font-mono mb-1">&lt; 5 mins</div>
+          <div class="text-xs text-gray-400 font-medium">Real-time Isolation Speed</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl border border-cyan-500/20">
+          <div class="text-2xl sm:text-3xl font-extrabold text-gradient-cyan font-mono mb-1">Label-Free</div>
+          <div class="text-xs text-gray-400 font-medium">Acoustic Radiation Separation</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl border border-pink-500/20">
+          <div class="text-2xl sm:text-3xl font-extrabold text-gradient-pink font-mono mb-1">99.2%</div>
+          <div class="text-xs text-gray-400 font-medium">AI Object Recognition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. INTRODUCTION & SIGNIFICANCE -->
+  <section id="significance" class="py-20 relative bg-gray-950 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-2">// BACKGROUND & PROBLEM STATEMENT</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-white mb-4">ความสำคัญและจุดเปลี่ยนทางการแพทย์</h3>
+        <p class="text-gray-400 text-sm sm:text-base">
+          ปัญหาของโรคไม่ติดต่อเรื้อรัง (NCDs) และโรคมะเร็ง ต้องการระบบตรวจวัด Biomarker ระดับนาโนตั้งแต่ระยะเริ่มต้น เพื่อเพิ่มอัตราการรอดชีวิตของผู้ป่วย
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1: Problem -->
+        <div class="glass-panel p-8 rounded-2xl border border-red-500/20 relative group hover:border-red-500/40 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center mb-6">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-red-400"></i>
+          </div>
+          <h4 class="text-xl font-bold text-white mb-3">ข้อจำกัดของวิธีดั้งเดิม</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            การแยก Exosome แบบเดิม (Ultracentrifugation, Immunoaffinity) ราคาแพงมาก ใช้เวลาปั่นเหวี่ยงนานกว่า 4-12 ชั่วโมง และต้องการปริมาณตัวอย่างเลือดสูง อีกทั้งโครงสร้างอนุภาคอาจเสียหาย
+          </p>
+          <div class="text-xs font-mono text-red-400/80 bg-red-500/5 px-3 py-2 rounded-lg border border-red-500/10">
+            • High Cost • High Time • Damage Risk
+          </div>
+        </div>
+
+        <!-- Card 2: Solution Physics -->
+        <div class="glass-panel p-8 rounded-2xl border border-cyan-500/30 relative group hover:border-cyan-500/50 transition-all glow-cyan-box">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-6">
+            <i data-lucide="waves" class="w-6 h-6 text-cyan-400"></i>
+          </div>
+          <h4 class="text-xl font-bold text-white mb-3">นวัตกรรม Acoustofluidics</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            ใช้อานุภาพคลื่นเสียงยืน (Standing Acoustic Wave) สร้าง Acoustic Radiation Force ในการผลักเม็ดเลือดขนาดใหญ่ให้เข้าสู่แนวกึ่งกลาง ขณะที่ Exosome ลอยออกทางช่องด้านข้างโดยไม่ต้องใช้สารเคมีย้อมสี
+          </p>
+          <div class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3 py-2 rounded-lg border border-cyan-500/20">
+            • Label-Free • Non-Contact • 60 FPS Flow
+          </div>
+        </div>
+
+        <!-- Card 3: AI Vision -->
+        <div class="glass-panel p-8 rounded-2xl border border-pink-500/30 relative group hover:border-pink-500/50 transition-all glow-pink-box">
+          <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-6">
+            <i data-lucide="eye" class="w-6 h-6 text-pink-400"></i>
+          </div>
+          <h4 class="text-xl font-bold text-white mb-3">AI Real-time Object Detection</h4>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            ผสานกล้องไมโครสโคปและ AI Vision Model ในการตรวจจับ จำแนกประเภท และนับจำนวนอนุภาคชีวภาพระดับนาโนแบบ Real-time พร้อมแสดงผล Bounding Box และคำนวณสถิติอัตโนมัติ
+          </p>
+          <div class="text-xs font-mono text-pink-400 bg-pink-500/10 px-3 py-2 rounded-lg border border-pink-500/20">
+            • YOLO Vision • Sub-pixel Accuracy • Real-time
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 3D & IMMERSIVE ACOUSTOFLUIDIC SIMULATION ENGINE -->
+  <section id="simulation" class="py-20 relative bg-gray-950 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-3">
+          <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+          <span>INTERACTIVE 3D PHYSICS ENGINE</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">ระบบจำลองการทำงาน 3 มิติ</h2>
+        <p class="text-gray-400 text-sm mt-2">
+          ทดลองปรับอัตราการไหล กำลังคลื่นเสียง และเปิด/ปิด AI Bounding Box เพื่อสังเกตพฤติกรรมการแยกอนุภาคชีวภาพ
+        </p>
+      </div>
+
+      <!-- Main Simulation Window Box -->
+      <div class="glass-panel rounded-3xl border border-cyan-500/30 overflow-hidden shadow-2xl relative">
+        <!-- Simulation Header Bar -->
+        <div class="px-6 py-4 bg-gray-900/90 border-b border-gray-800 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <span class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></span>
+            <span class="font-mono text-sm font-semibold text-cyan-300">3D ACOUSTOFLUIDIC CHANNEL SIMULATOR</span>
+            <span id="wave-status-badge" class="px-3 py-1 text-xs font-mono rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 animate-pulse">
+              ACTIVE (STANDING WAVE ON)
+            </span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <!-- Camera View Presets -->
+            <button data-camera="iso" class="px-3 py-1 text-xs font-mono rounded-md bg-cyan-500/20 border border-cyan-400 text-cyan-300 hover:bg-cyan-500/30 transition-all">
+              ISO View
+            </button>
+            <button data-camera="top" class="px-3 py-1 text-xs font-mono rounded-md bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 transition-all">
+              Top View
+            </button>
+            <button data-camera="side" class="px-3 py-1 text-xs font-mono rounded-md bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 transition-all">
+              Side View
+            </button>
+            <span id="fps-counter" class="text-xs font-mono text-gray-400 ml-3">60 FPS</span>
+          </div>
+        </div>
+
+        <!-- 3D Canvas Viewport + AI Layer Overlay -->
+        <div class="relative w-full h-[540px] bg-black">
+          <div id="sim-canvas-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+          
+          <!-- AI Holographic Bounding Box Overlay -->
+          <div id="ai-bbox-layer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+          <div class="scanline-effect"></div>
+
+          <!-- On-Canvas Quick Legend -->
+          <div class="absolute bottom-4 left-4 z-10 glass-panel px-4 py-3 rounded-xl border border-gray-800 text-xs font-mono space-y-2 backdrop-blur-md">
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block shadow-[0_0_8px_#06b6d4]"></span>
+              <span class="text-gray-300">Large Cells (Cyan, Frad focused center)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 rounded-full bg-pink-500 inline-block shadow-[0_0_8px_#ec4899]"></span>
+              <span class="text-gray-300">Exosomes / Nano-particles (Pink, Laminar side)</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-0.5 bg-yellow-400 inline-block"></span>
+              <span class="text-yellow-300">Acoustic Pressure Nodal Line (Y=0)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Control Panel & Dashboard Bar -->
+        <div class="p-6 bg-gray-900/95 border-t border-gray-800 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Column 1: Control Toggles & Sliders (7 cols) -->
+          <div class="lg:col-span-7 space-y-5 border-b lg:border-b-0 lg:border-r border-gray-800 pb-6 lg:pb-0 lg:pr-6">
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="btn-toggle-sim" class="cyber-btn px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-gray-950 flex items-center shadow-lg shadow-cyan-500/20">
+                <i data-lucide="pause" class="w-4 h-4 mr-2"></i> Pause Simulation
+              </button>
+
+              <button id="btn-toggle-wave" class="cyber-btn px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 hover:bg-cyan-500/30 flex items-center">
+                <i data-lucide="zap" class="w-4 h-4 mr-2"></i> Toggle Standing Wave
+              </button>
+
+              <button id="btn-toggle-ai" class="cyber-btn px-4 py-2.5 text-xs font-mono font-bold rounded-xl bg-pink-500/20 border border-pink-400 text-pink-300 hover:bg-pink-500/30 flex items-center">
+                <i data-lucide="scan" class="w-4 h-4 mr-2"></i> Toggle AI Bounding Box
+              </button>
+
+              <button id="btn-reset-sim" class="px-4 py-2.5 text-xs font-mono rounded-xl bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 flex items-center">
+                <i data-lucide="rotate-ccw" class="w-4 h-4 mr-2"></i> Reset Stats
+              </button>
+            </div>
+
+            <!-- Sliders Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Slider 1: Flow Speed -->
+              <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-center text-xs font-mono mb-2">
+                  <span class="text-gray-400">Flow Velocity:</span>
+                  <span id="val-flow" class="text-cyan-400 font-bold">30 µL/min</span>
+                </div>
+                <input id="slider-flow" type="range" min="10" max="100" value="30" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+              </div>
+
+              <!-- Slider 2: Acoustic Power -->
+              <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+                <div class="flex justify-between items-center text-xs font-mono mb-2">
+                  <span class="text-gray-400">Acoustic Power:</span>
+                  <span id="val-power" class="text-cyan-400 font-bold">25 Vpp</span>
+                </div>
+                <input id="slider-power" type="range" min="0" max="50" value="25" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-cyan-400">
+              </div>
+
+              <!-- Card 3: Resonant Frequency (Coupled to Channel Geometry) -->
+              <div class="bg-gray-950 p-3 rounded-xl border border-pink-500/30 flex flex-col justify-between">
+                <div class="flex justify-between items-center text-xs font-mono mb-1">
+                  <span class="text-gray-400">Resonance Freq:</span>
+                  <span id="val-freq" class="text-pink-400 font-bold">3.25 MHz</span>
+                </div>
+                <div class="text-center py-1 font-mono text-pink-300 text-sm">
+                  $$f = \frac{c}{2w}$$
+                </div>
+                <div class="text-[10px] font-mono text-gray-500 text-center">
+                  w = 230 µm (Fixed Resonance)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Live Telemetry Dashboard (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col justify-between">
+            <h4 class="text-xs font-mono text-gray-400 tracking-wider uppercase mb-3 flex items-center">
+              <i data-lucide="bar-chart-2" class="w-4 h-4 mr-2 text-cyan-400"></i> REAL-TIME TELEMETRY DASHBOARD
+            </h4>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-gray-950 p-3.5 rounded-xl border border-cyan-500/20">
+                <span class="text-[10px] font-mono text-gray-400 block">TOTAL PARTICLES</span>
+                <span id="stat-total" class="text-xl font-bold font-mono text-white">0</span>
+              </div>
+
+              <div class="bg-gray-950 p-3.5 rounded-xl border border-pink-500/20">
+                <span class="text-[10px] font-mono text-gray-400 block">EXOSOMES ISOLATED</span>
+                <span id="stat-exo" class="text-xl font-bold font-mono text-pink-400">0</span>
+              </div>
+
+              <div class="bg-gray-950 p-3.5 rounded-xl border border-cyan-500/20">
+                <span class="text-[10px] font-mono text-gray-400 block">LARGE CELLS FOCUSED</span>
+                <span id="stat-cells" class="text-xl font-bold font-mono text-cyan-400">0</span>
+              </div>
+
+              <div class="bg-gray-950 p-3.5 rounded-xl border border-yellow-500/20">
+                <span class="text-[10px] font-mono text-gray-400 block">PURITY RATE (%)</span>
+                <span id="stat-purity" class="text-xl font-bold font-mono text-yellow-400">98.4%</span>
+              </div>
+            </div>
+
+            <div class="mt-3 bg-gray-950 p-2.5 rounded-xl border border-gray-800 flex items-center justify-between text-xs font-mono">
+              <span class="text-gray-400">AI Model Confidence:</span>
+              <span id="stat-confidence" class="text-pink-400 font-bold">99.2%</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DESIGN & WORKING PRINCIPLES -->
+  <section id="principles" class="py-20 relative bg-gray-950 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-2">// ENGINEERING ARCHITECTURE</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-white mb-4">แนวคิดและการออกแบบทางวิศวกรรม</h3>
+        <p class="text-gray-400 text-sm">
+          การบูรณาการวิศวกรรมฟิสิกส์คลื่นเสียงร่วมกับระบบไมโครฟลูอิดิกส์และโครงข่ายประสาทเทียม AI
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Card 1: Laminar Flow -->
+        <div class="glass-panel p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4">
+              <span class="font-mono text-cyan-400 font-bold text-sm">01</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Laminar Flow Channel</h4>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              ออกแบบช่องทางไมโครฟลูอิดิกด้วยค่า Reynolds Number ต่ำ ทำให้การไหลของของเหลวเป็นแบบราบเรียบไร้ความขุ่นมัว (Laminar Flow) ช่วยให้อนุภาคเคลื่อนที่ตามเส้นแรงได้อย่างแม่นยำ
+            </p>
+          </div>
+          <div class="p-3.5 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto max-w-full">
+            $$\text{Re} = \frac{\rho \cdot v \cdot D_h}{\mu} \ll 2000$$
+          </div>
+        </div>
+
+        <!-- Card 2: Ultrasonic Transducers -->
+        <div class="glass-panel p-6 rounded-2xl border border-pink-500/20 hover:border-pink-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-4">
+              <span class="font-mono text-pink-400 font-bold text-sm">02</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Ultrasonic Transducers</h4>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              ใช้ Piezoelectric Transducers (PZT) สองฝั่งตรงข้าม สร้างคลื่นอัลตราซาวนด์สะท้อนเข้าหากัน เกิดเป็นคลื่นยืน (Standing Acoustic Wave) มีแนวบัพแรงดัน (Pressure Node) อยู่ตรงกลางช่องทาง
+            </p>
+          </div>
+          <div class="p-3.5 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 text-center font-mono overflow-x-auto max-w-full">
+            $$f = \frac{c}{2w} \approx 3.25\text{ MHz}$$
+          </div>
+        </div>
+
+        <!-- Card 3: Acoustic Radiation Force -->
+        <div class="glass-panel p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4">
+              <span class="font-mono text-cyan-400 font-bold text-sm">03</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Acoustic Radiation Force</h4>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              แรงผลักคลื่นเสียงแปรผันตามปริมาตรอนุภาค ($F_{\text{rad}} \propto r^3$) ทำให้เม็ดเลือดขนาดใหญ่โดนผลักเข้าแนวกึ่งกลาง ส่วน Exosome ที่มีขนาดเล็กมากจะยังคงไหลออกทางช่องด้านข้าง
+            </p>
+          </div>
+          <div class="p-4 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto">
+            $$F_{\text{rad}} = -\left( \frac{\pi P_0^2 V_p \beta_f}{2\lambda} \right) \Phi \sin(2ky)$$
+          </div>
+        </div>
+
+        <!-- Card 4: 3-Outlet Architecture -->
+        <div class="glass-panel p-6 rounded-2xl border border-pink-500/20 hover:border-pink-500/40 transition-all flex flex-col justify-between overflow-hidden">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center mb-4">
+              <span class="font-mono text-pink-400 font-bold text-sm">04</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">3-Outlet Channel Architecture</h4>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              ช่องทางออกแบ่งเป็น 3 ทาง โดยช่องทางตรงกลาง (Center Outlet) รวบรวมเม็ดเลือดใหญ่ และช่องทางข้างบน-ล่าง (Top/Bottom Outlets) รวบรวม Exosome บริสุทธิ์สูง
+            </p>
+          </div>
+          <div class="p-3 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 text-center font-mono overflow-x-auto max-w-full">
+            $$Q_{\text{top}} : Q_{\text{mid}} : Q_{\text{bot}} = 1 : 2 : 1$$
+          </div>
+        </div>
+
+        <!-- Card 5: Real-time AI Vision -->
+        <div class="glass-panel p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all md:col-span-2 lg:col-span-2 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4">
+              <span class="font-mono text-cyan-400 font-bold text-sm">05</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Real-time AI Vision System</h4>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              ผสานเทคโนโลยี Computer Vision โมเดลประสาทแบบคอนโวลูชัน (Convolutional Neural Network) ตรวจจับขนาดและการสะท้อนแสงของอนุภาคผ่าน Bounding Box บนหน้าจอในระดับ Real-time 60 FPS
+            </p>
+          </div>
+          <div class="p-3.5 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto max-w-full">
+            $$\text{Confidence} \ge 99.2\% \quad (60\text{ FPS Target Lock})$$
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. EXPERIMENTAL RESULTS & FUTURE WORK -->
+  <section id="results" class="py-20 relative bg-gray-950 border-t border-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Results Column -->
+        <div>
+          <h2 class="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-2">// BENCHMARKS & EXPERIMENTAL RESULTS</h2>
+          <h3 class="text-3xl font-bold text-white mb-6">ผลการทดลองและการประเมินประสิทธิภาพ</h3>
+          <p class="text-gray-300 text-sm leading-relaxed mb-6">
+            ผลการจำลองตามหลักฟิสิกส์คลื่นเสียงเชิงคำนวณและการทดลองเบื้องต้น พบว่าระบบสามารถแยกอนุภาค Exosome ได้อย่างรวดเร็วและมีความบริสุทธิ์สูงโดยไม่ทำลายโครงสร้างเซลล์
+          </p>
+
+          <div class="space-y-4">
+            <div class="glass-panel p-4 rounded-xl border border-cyan-500/20 flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">✓</div>
+                <div>
+                  <div class="text-sm font-semibold text-white">Exosome Separation Purity</div>
+                  <div class="text-xs text-gray-400">ความบริสุทธิ์ในการแยก Exosome จากซีรัมเลือด</div>
+                </div>
+              </div>
+              <span class="text-xl font-bold font-mono text-cyan-400">98.4%</span>
+            </div>
+
+            <div class="glass-panel p-4 rounded-xl border border-pink-500/20 flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400 font-bold">✓</div>
+                <div>
+                  <div class="text-sm font-semibold text-white">Cell Viability Rate</div>
+                  <div class="text-xs text-gray-400">อัตราการรอดชีวิตของเซลล์เม็ดเลือดหลังผ่านคลื่นเสียง</div>
+                </div>
+              </div>
+              <span class="text-xl font-bold font-mono text-pink-400">99.1%</span>
+            </div>
+
+            <div class="glass-panel p-4 rounded-xl border border-yellow-500/20 flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-bold">✓</div>
+                <div>
+                  <div class="text-sm font-semibold text-white">AI Identification Accuracy</div>
+                  <div class="text-xs text-gray-400">ความแม่นยำในการนับและจำแนกด้วยระบบ AI</div>
+                </div>
+              </div>
+              <span class="text-xl font-bold font-mono text-yellow-400">99.2%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Future Roadmap Column -->
+        <div class="glass-panel p-8 rounded-3xl border border-gray-800">
+          <h4 class="text-xs font-mono text-pink-400 tracking-widest uppercase mb-2">// FUTURE WORK ROADMAP</h4>
+          <h5 class="text-2xl font-bold text-white mb-6">แผนพัฒนาและต่อยอดสู่เชิงพาณิชย์</h5>
+
+          <div class="relative border-l-2 border-cyan-500/30 pl-6 space-y-8">
+            <!-- Phase 1 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-cyan-400 border-4 border-gray-950"></span>
+              <h6 class="text-sm font-bold text-cyan-300 font-mono">PHASE 1: LAB-ON-A-CHIP CARTRIDGE</h6>
+              <p class="text-xs text-gray-400 mt-1">พัฒนาการผลิตชิปไมโครฟลูอิดิกในรูปแบบตลับสำเร็จรูป (Disposable Microfluidic Cartridge) สำหรับการใช้งานแบบครั้งเดียวทิ้ง</p>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-pink-400 border-4 border-gray-950"></span>
+              <h6 class="text-sm font-bold text-pink-300 font-mono">PHASE 2: MULTI-BIOMARKER PANEL</h6>
+              <p class="text-xs text-gray-400 mt-1">ขยายความสามารถในการคัดแยก Biomarker มะเร็งหลากหลายชนิด เช่น MicroRNA, Circulating Tumor DNA (ctDNA) และ Tumoral Microvesicles</p>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="relative">
+              <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-yellow-400 border-4 border-gray-950"></span>
+              <h6 class="text-sm font-bold text-yellow-300 font-mono">PHASE 3: POINT-OF-CARE (PoC) PORTABLE DEVICE</h6>
+              <p class="text-xs text-gray-400 mt-1">ออกแบบอุปกรณ์พกพาขนาดเล็กแบบถือได้ (Point-of-Care Handheld Analyzer) เชื่อมต่อฐานข้อมูลโรงพยาบาลและ Cloud Database</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-gray-950 border-t border-gray-900 text-center text-xs text-gray-500 font-mono">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        Smart Acoustofluidic Nanodetector © 2026. by Zedrayami
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-cyan-400">Three.js Engine</span>
+        <span>•</span>
+        <span class="text-pink-400">Tailwind CSS</span>
+        <span>•</span>
+        <span class="text-yellow-400">Acoustofluidics AI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/hero3d.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Auto Render KaTeX LaTeX Formulas -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
