@@ -1,9 +1,9 @@
 # Smart-Acoustofluidic-Nanodetector
 
-#PROJECT OVERVIEW
+# PROJECT OVERVIEW
 Smart Acoustofluidic Nanodetector (SAN-X1) is an interactive 3D Web SPA demonstrating next-generation nanobiological particle (Exosome) isolation from blood using Standing Bulk Acoustic Waves (BAW) and Real-time AI Vision for Precision Medicine diagnostics.
 
-#KEY FEATURES & HIGHLIGHTS
+# KEY FEATURES & HIGHLIGHTS
 - 3D Autonomous Hero Banner: Smooth, continuous 3D rotating microfluidic chip background powered by Three.js.
 - 3D Acoustofluidic Physics Engine:
   * Transparent 3D Glass Channel with 3-Outlet fluidic separation architecture.
