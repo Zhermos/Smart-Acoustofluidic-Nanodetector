@@ -170,7 +170,7 @@
           </div>
           <h4 class="text-xl font-bold text-white mb-3">นวัตกรรม Acoustofluidics</h4>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            ใช้อานุภาพคลื่นเสียงยืน (Standing Acoustic Wave) สร้าง Acoustic Radiation Force ในการผลักเม็ดเลือดขนาดใหญ่ให้เข้าสู่แนวกึ่งกลาง ขณะที่ Exosome ลอยออกทางช่องด้านข้างโดยไม่ต้องใช้สารเคมีย้อมสี
+            ใช้แรงผลักจากคลื่นเสียงนิ่ง (Standing Acoustic Wave) สร้าง Acoustic Radiation Force ในการผลักเม็ดเลือดขนาดใหญ่ให้เข้าสู่แนวกึ่งกลาง ขณะที่ Exosome ลอยออกทางช่องด้านข้างโดยไม่ต้องใช้สารเคมีย้อมสี
           </p>
           <div class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3 py-2 rounded-lg border border-cyan-500/20">
             • Label-Free • Non-Contact • 60 FPS Flow
@@ -383,8 +383,14 @@
               ออกแบบช่องทางไมโครฟลูอิดิกด้วยค่า Reynolds Number ต่ำ ทำให้การไหลของของเหลวเป็นแบบราบเรียบไร้ความขุ่นมัว (Laminar Flow) ช่วยให้อนุภาคเคลื่อนที่ตามเส้นแรงได้อย่างแม่นยำ
             </p>
           </div>
-          <div class="p-3.5 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto max-w-full">
-            $$\text{Re} = \frac{\rho \cdot v \cdot D_h}{\mu} \ll 2000$$
+          <div class="p-3 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 font-mono overflow-x-auto max-w-full space-y-1.5">
+            <div class="text-center">
+              $$\text{Re} = \frac{\rho \cdot v \cdot D_h}{\mu} \ll 2000$$
+            </div>
+            <div class="text-[10px] text-gray-400 border-t border-gray-800/80 pt-1.5 leading-snug font-sans">
+              <div><b class="text-cyan-400 font-mono">Re</b>: Reynolds Number &bull; <b class="text-cyan-400 font-mono">&rho;</b>: ความหนาแน่นของเหลว</div>
+              <div><b class="text-cyan-400 font-mono">v</b>: ความเร็วการไหล &bull; <b class="text-cyan-400 font-mono">D_h</b>: เส้นผ่านศูนย์กลาง &bull; <b class="text-cyan-400 font-mono">&mu;</b>: ความหนืด</div>
+            </div>
           </div>
         </div>
 
@@ -396,11 +402,17 @@
             </div>
             <h4 class="text-lg font-bold text-white mb-2">Ultrasonic Transducers</h4>
             <p class="text-gray-400 text-xs leading-relaxed mb-4">
-              ใช้ Piezoelectric Transducers (PZT) สองฝั่งตรงข้าม สร้างคลื่นอัลตราซาวนด์สะท้อนเข้าหากัน เกิดเป็นคลื่นยืน (Standing Acoustic Wave) มีแนวบัพแรงดัน (Pressure Node) อยู่ตรงกลางช่องทาง
+              ใช้ Piezoelectric Transducers (PZT) สองฝั่งตรงข้าม สร้างคลื่นอัลตราซาวนด์สะท้อนเข้าหากัน เกิดเป็นคลื่นเสียงนิ่ง (Standing Acoustic Wave) มีแนวบัพแรงดัน (Pressure Node) อยู่ตรงกลางช่องทาง
             </p>
           </div>
-          <div class="p-3.5 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 text-center font-mono overflow-x-auto max-w-full">
-            $$f = \frac{c}{2w} \approx 3.25\text{ MHz}$$
+          <div class="p-3 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 font-mono overflow-x-auto max-w-full space-y-1.5">
+            <div class="text-center">
+              $$f = \frac{c}{2w} \approx 3.25\text{ MHz}$$
+            </div>
+            <div class="text-[10px] text-gray-400 border-t border-gray-800/80 pt-1.5 leading-snug font-sans">
+              <div><b class="text-pink-400 font-mono">f</b>: ความถี่เรโซแนนซ์ธรรมชาติ (Resonance Freq)</div>
+              <div><b class="text-pink-400 font-mono">c</b>: ความเร็วเสียงพลาสม่า ($1,495\text{ m/s}$) &bull; <b class="text-pink-400 font-mono">w</b>: ความกว้าง ($230\ \mu\text{m}$)</div>
+            </div>
           </div>
         </div>
 
@@ -415,8 +427,14 @@
               แรงผลักคลื่นเสียงแปรผันตามปริมาตรอนุภาค ($F_{\text{rad}} \propto r^3$) ทำให้เม็ดเลือดขนาดใหญ่โดนผลักเข้าแนวกึ่งกลาง ส่วน Exosome ที่มีขนาดเล็กมากจะยังคงไหลออกทางช่องด้านข้าง
             </p>
           </div>
-          <div class="p-4 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto">
-            $$F_{\text{rad}} = -\left( \frac{\pi P_0^2 V_p \beta_f}{2\lambda} \right) \Phi \sin(2ky)$$
+          <div class="p-3 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 font-mono overflow-x-auto max-w-full space-y-1.5">
+            <div class="text-center">
+              $$F_{\text{rad}} = -\left( \frac{\pi P_0^2 V_p \beta_f}{2\lambda} \right) \Phi \sin(2ky)$$
+            </div>
+            <div class="text-[10px] text-gray-400 border-t border-gray-800/80 pt-1.5 leading-snug font-sans">
+              <div><b class="text-cyan-400 font-mono">F_rad</b>: แรงผลักคลื่นเสียงนิ่ง &bull; <b class="text-cyan-400 font-mono">V_p</b>: ปริมาตรอนุภาค ($V_p \propto r^3$)</div>
+              <div><b class="text-cyan-400 font-mono">P_0</b>: ความดันคลื่น &bull; <b class="text-cyan-400 font-mono">&beta;_f</b>: ความอัดได้ของเหลว &bull; <b class="text-cyan-400 font-mono">&Phi;</b>: Contrast Factor</div>
+            </div>
           </div>
         </div>
 
@@ -431,8 +449,14 @@
               ช่องทางออกแบ่งเป็น 3 ทาง โดยช่องทางตรงกลาง (Center Outlet) รวบรวมเม็ดเลือดใหญ่ และช่องทางข้างบน-ล่าง (Top/Bottom Outlets) รวบรวม Exosome บริสุทธิ์สูง
             </p>
           </div>
-          <div class="p-3 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 text-center font-mono overflow-x-auto max-w-full">
-            $$Q_{\text{top}} : Q_{\text{mid}} : Q_{\text{bot}} = 1 : 2 : 1$$
+          <div class="p-3 bg-gray-950 rounded-xl border border-pink-500/30 text-pink-300 font-mono overflow-x-auto max-w-full space-y-1.5">
+            <div class="text-center">
+              $$Q_{\text{top}} : Q_{\text{mid}} : Q_{\text{bot}} = 1 : 2 : 1$$
+            </div>
+            <div class="text-[10px] text-gray-400 border-t border-gray-800/80 pt-1.5 leading-snug font-sans">
+              <div><b class="text-pink-400 font-mono">Q_top / Q_bot</b>: อัตราไหลออกทางข้าง ($25\%$ แยก Exosomes)</div>
+              <div><b class="text-pink-400 font-mono">Q_mid</b>: อัตราไหลออกทางกลาง ($50\%$ แยกเม็ดเลือดใหญ่)</div>
+            </div>
           </div>
         </div>
 
@@ -447,8 +471,14 @@
               ผสานเทคโนโลยี Computer Vision โมเดลประสาทแบบคอนโวลูชัน (Convolutional Neural Network) ตรวจจับขนาดและการสะท้อนแสงของอนุภาคผ่าน Bounding Box บนหน้าจอในระดับ Real-time 60 FPS
             </p>
           </div>
-          <div class="p-3.5 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 text-center font-mono overflow-x-auto max-w-full">
-            $$\text{Confidence} \ge 99.2\% \quad (60\text{ FPS Target Lock})$$
+          <div class="p-3 bg-gray-950 rounded-xl border border-cyan-500/30 text-cyan-300 font-mono overflow-x-auto max-w-full space-y-1.5">
+            <div class="text-center">
+              $$\text{Confidence} \ge 99.2\% \quad (60\text{ FPS Target Lock})$$
+            </div>
+            <div class="text-[10px] text-gray-400 border-t border-gray-800/80 pt-1.5 leading-snug font-sans">
+              <div><b class="text-cyan-400 font-mono">Confidence</b>: ค่าความเชื่อมั่นของโมเดล AI ในการจำแนกชนิดอนุภาค</div>
+              <div><b class="text-cyan-400 font-mono">FPS</b>: ความเร็วเฟรมเรตการประมวลผลติดตามวัตถุต่อวินาที</div>
+            </div>
           </div>
         </div>
 
