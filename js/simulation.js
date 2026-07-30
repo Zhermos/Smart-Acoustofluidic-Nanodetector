@@ -141,7 +141,7 @@
     channelGroup.add(mainLines);
 
     // 3 Outlet Channels (Right Branching)
-    // Top Outlet (Exosome Outlet)
+    // Top Outlet (Nanoparticles Outlet)
     const topOutletGeo = new THREE.BoxGeometry(8, 1.2, 1.6);
     const topOutletMesh = new THREE.Mesh(topOutletGeo, glassMat);
     topOutletMesh.position.set(8, 2.2, 0);
@@ -154,7 +154,7 @@
     centerOutletMesh.position.set(8, 0, 0);
     channelGroup.add(centerOutletMesh);
 
-    // Bottom Outlet (Exosome Outlet)
+    // Bottom Outlet (Nanoparticles Outlet)
     const botOutletGeo = new THREE.BoxGeometry(8, 1.2, 1.6);
     const botOutletMesh = new THREE.Mesh(botOutletGeo, glassMat);
     botOutletMesh.position.set(8, -2.2, 0);
@@ -287,14 +287,14 @@
       if (state.standingWaveActive && p.mesh.position.x >= acousticZoneMinX && p.mesh.position.x <= acousticZoneMaxX) {
         // Frad is strongly dependent on particle radius (Frad ~ r^3)
         // Large cells experience high acoustic radiation force pushing them to nodal center (Y = 0)
-        // Exosomes experience negligible acoustic force relative to fluid drag force
+        // Nanoparticles experience negligible acoustic force relative to fluid drag force
         if (p.type === 'CELL') {
           const distToNode = 0 - p.mesh.position.y;
           // Acoustic restoring force towards Y=0
           const fAcoustic = distToNode * 0.18 * state.acousticPower * (state.frequency / 3.2);
           p.mesh.position.y += fAcoustic;
         } else {
-          // Exosomes drift slightly due to parabolic flow velocity profile towards outer walls
+          // Nanoparticles drift slightly due to parabolic flow velocity profile towards outer walls
           const wallRepulsion = p.mesh.position.y > 0 ? 0.005 : -0.005;
           p.mesh.position.y += wallRepulsion;
         }
@@ -378,7 +378,7 @@
         const isCell = p.type === 'CELL';
         const boxSize = isCell ? 36 : 24;
         const cssClass = isCell ? 'ai-bbox ai-bbox-cell' : 'ai-bbox';
-        const labelText = isCell ? `CELL #${p.id} [${p.confidence}%]` : `EXO #${p.id} [${p.confidence}%]`;
+        const labelText = isCell ? `CELL #${p.id} [${p.confidence}%]` : `NANO #${p.id} [${p.confidence}%]`;
 
         html += `
           <div class="${cssClass}" style="left: ${x}px; top: ${y}px; width: ${boxSize}px; height: ${boxSize}px;">
@@ -394,11 +394,11 @@
   // 7. Telemetry Metrics Calculator & UI Sync
   function updateTelemetryData() {
     if (state.totalParticles > 0) {
-      const targetExosomes = state.exosomesSeparated;
+      const targetNanoParticles = state.exosomesSeparated;
       const targetCells = state.cellsSeparated;
-      const totalSeparated = targetExosomes + targetCells;
+      const totalSeparated = targetNanoParticles + targetCells;
       if (totalSeparated > 0) {
-        state.purity = Math.min(99.8, (94.0 + (targetExosomes / totalSeparated) * 5.8)).toFixed(1);
+        state.purity = Math.min(99.8, (94.0 + (targetNanoParticles / totalSeparated) * 5.8)).toFixed(1);
       }
     }
 
